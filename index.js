@@ -24,6 +24,7 @@ async function run() {
         //// remove start
         const database = client.db('assignment12db');
         const servicesCollection = database.collection('cars');
+        const servicesCollectionExploreCars = database.collection('exploreCars');
         const servicesCollection2 = database.collection('reviews');
 
         // // GET API
@@ -39,6 +40,13 @@ async function run() {
             res.send(cars);
         });
         //// remove end
+
+        // GET API
+        app.get('/exploreCars', async (req, res) => {
+            const cursor = servicesCollectionExploreCars.find({});
+            const cars = await cursor.toArray();
+            res.send(cars);
+        });
 
 
         ////

@@ -33,7 +33,7 @@ async function run() {
         //     const services = await cursor.toArray();
         //     res.send(services);
         // });
-        // GET API cars
+        // GET API for cars
         app.get('/cars', async (req, res) => {
             const cursor = servicesCollection.find({});
             const cars = await cursor.toArray();
@@ -41,19 +41,32 @@ async function run() {
         });
         //// remove end
 
-        // GET API explorecars
+        // GET API for explorecars
         app.get('/exploreCars', async (req, res) => {
             const cursor = servicesCollectionExploreCars.find({});
             const cars = await cursor.toArray();
             res.send(cars);
         });
 
-        // GET API reviews
+        // GET API for reviews
         app.get('/reviews', async (req, res) => {
             const cursor = servicesCollectionReviews.find({});
             const reviews = await cursor.toArray();
             res.send(reviews);
         });
+
+
+        // POST API for reviews
+        app.post('/reviews', async (req, res) => {
+            const review = req.body;
+            console.log('hit the post api', review);
+            res.send('hit the post');
+
+            const result = await servicesCollectionReviews.insertOne(review);
+            console.log(result);
+            res.json(result);
+        });
+
 
 
         ////

@@ -25,7 +25,7 @@ async function run() {
         const database = client.db('assignment12db');
         const servicesCollection = database.collection('cars');
         const servicesCollectionExploreCars = database.collection('exploreCars');
-        const servicesCollection2 = database.collection('reviews');
+        const servicesCollectionReviews = database.collection('reviews');
 
         // // GET API
         // app.get('/services', async (req, res) => {
@@ -33,7 +33,7 @@ async function run() {
         //     const services = await cursor.toArray();
         //     res.send(services);
         // });
-        // GET API
+        // GET API cars
         app.get('/cars', async (req, res) => {
             const cursor = servicesCollection.find({});
             const cars = await cursor.toArray();
@@ -41,11 +41,18 @@ async function run() {
         });
         //// remove end
 
-        // GET API
+        // GET API explorecars
         app.get('/exploreCars', async (req, res) => {
             const cursor = servicesCollectionExploreCars.find({});
             const cars = await cursor.toArray();
             res.send(cars);
+        });
+
+        // GET API reviews
+        app.get('/reviews', async (req, res) => {
+            const cursor = servicesCollectionReviews.find({});
+            const reviews = await cursor.toArray();
+            res.send(reviews);
         });
 
 

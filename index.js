@@ -26,6 +26,7 @@ async function run() {
         const servicesCollection = database.collection('cars');
         const servicesCollectionExploreCars = database.collection('exploreCars');
         const servicesCollectionReviews = database.collection('reviews');
+        const servicesCollectionOrders = database.collection('orders');
 
         // // GET API
         // app.get('/services', async (req, res) => {
@@ -55,6 +56,13 @@ async function run() {
             res.send(reviews);
         });
 
+        // GET API for orders
+        app.get('/orders', async (req, res) => {
+            const cursor = servicesCollectionOrders.find({});
+            const orders = await cursor.toArray();
+            res.send(orders);
+        });
+
 
         // POST API for reviews
         app.post('/reviews', async (req, res) => {
@@ -66,6 +74,27 @@ async function run() {
             console.log(result);
             res.json(result);
         });
+
+
+
+
+
+        // POST API for place order
+        app.post('/placeorder/:id', async (req, res) => {
+            const order = req.body;
+            console.log('hit the post api', review);
+            res.send('hit the post');
+
+            const result = await servicesCollectionOrders.insertOne(order);
+            console.log(result);
+            res.json(result);
+        });
+
+
+
+
+
+
 
 
 
